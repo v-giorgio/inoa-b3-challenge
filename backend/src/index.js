@@ -2,13 +2,15 @@ const express = require("express");
 const fetch = require("node-fetch-commonjs");
 require("dotenv").config();
 
+require("./database");
+
 const port = process.env.PORT || 3001;
 
 const app = express();
 
 app.use(express.json());
 
-const testAPI = async () => {
+/* const testAPI = async () => {
   try {
     const response = await fetch(
       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${process.env.API_KEY}`
@@ -20,12 +22,12 @@ const testAPI = async () => {
   }
 };
 
-testAPI();
+testAPI(); */
 
-/* app.listen(port, () => {
+app.listen(port, () => {
   try {
     console.log(`Api running on ${port}`);
   } catch (e) {
     console.log(`Failed to run API:\n\n ${e}`);
   }
-}); */
+});
