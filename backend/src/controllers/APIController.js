@@ -1,3 +1,5 @@
+const fetch = require("node-fetch-commonjs");
+
 class APIController {
   static getDataAPI = async (name, queryDate) => {
     try {
@@ -6,9 +8,9 @@ class APIController {
       );
       const data = await response.json();
       const assets = {
-        name: name,
-        query_date: queryDate,
-        query_value: await data["Time Series (Daily)"][queryDate],
+        name: `${name}`,
+        query_date: `${queryDate}`,
+        query_value: await data["Time Series (Daily)"][queryDate]["4. close"],
       };
 
       return assets;

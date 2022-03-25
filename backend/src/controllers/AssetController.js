@@ -9,9 +9,9 @@ class AssetController {
         where: { name: name, query_date: queryDate },
       });
 
-      return res.status(200).json(asset);
+      return asset;
     } catch (e) {
-      return res.status(500).json(e.message);
+      return null;
     }
   };
 
@@ -31,10 +31,11 @@ class AssetController {
 
       const assetApi = await APIController.getDataAPI(
         inputAsset.name,
-        inputAsset.queryDate
+        inputAsset.query_date
       );
+      console.log(assetApi);
 
-      const newAsset = await Assets.create(JSON.stringify(assetApi));
+      const newAsset = await Assets.create(assetApi);
 
       return res.status(200).json(newAsset);
     } catch (e) {
