@@ -17,6 +17,10 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
+      query_value: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

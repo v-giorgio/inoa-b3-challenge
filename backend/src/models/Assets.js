@@ -6,6 +6,7 @@ class Assets extends Model {
       {
         name: DataTypes.STRING,
         query_date: DataTypes.DATEONLY,
+        query_value: DataTypes.FLOAT,
       },
       {
         sequelize,
