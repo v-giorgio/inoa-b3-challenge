@@ -1,6 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch-commonjs");
 require("dotenv").config();
+const routes = require("./routes");
 
 require("./database");
 
@@ -9,6 +10,8 @@ const port = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json());
+
+routes(app);
 
 app.listen(port, () => {
   try {
