@@ -11,10 +11,24 @@ type FormData = {
   end_date: string;
 };
 
-function Form() {
+type QueryStart = {
+  name: string;
+  start_date: string;
+  start_value: number;
+};
+
+type QueryEnd = {
+  end_date: string;
+  end_value: number;
+};
+
+function Form({ queryGenerator }: any) {
   const { control, handleSubmit } = useForm<FormData>();
+  const [queryStart, setQueryStart] = useState<QueryStart>();
+  const [queryEnd, setQueryEnd] = useState<QueryEnd>();
   const [query, setQuery] = useState({});
 
+  /* called upon the form submit - api requests */
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     await api
       .post("/assets", {
@@ -22,7 +36,7 @@ function Form() {
         query_date: `${data.start_date}`,
       })
       .then((res: any) => {
-        setQuery({
+        setQueryStart({
           name: res.data.name,
           start_date: res.data.query_date,
           start_value: res.data.query_value,
@@ -38,7 +52,7 @@ function Form() {
         query_date: `${data.end_date}`,
       })
       .then((res: any) => {
-        setQuery({
+        setQueryEnd({
           end_date: res.data.query_date,
           end_value: res.data.query_value,
         });
@@ -48,9 +62,28 @@ function Form() {
       });
   };
 
+  /* renders the main query once all the requests are done */
   useEffect(() => {
-    console.log(query);
-  }, [query]);
+    setTimeout(() => {
+      setQuery({
+        name: queryStart?.name,
+        start_date: queryStart?.start_date,
+        start_value: queryStart?.start_value,
+        end_date: queryEnd?.end_date,
+        end_value: queryEnd?.end_value,
+      });
+    }, 1000);
+  }, [
+    queryEnd,
+    queryStart?.name,
+    queryStart?.start_date,
+    queryStart?.start_value,
+  ]);
+
+  /* passes the query data to its parent - MAIN PAGE */
+  useEffect(() => {
+    queryGenerator(query);
+  }, [query, queryGenerator]);
 
   return (
     <MainSection style={{ color: colors.light }}>
