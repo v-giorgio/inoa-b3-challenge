@@ -13,6 +13,11 @@ export const SectionTitle = styled.h1`
   width: 316px;
   height: 118px;
   font-size: 48px;
+
+  @media (max-width: 850px) {
+    font-size: 32px;
+    text-align: center;
+  }
 `;
 
 export const SectionText = styled.p`
@@ -20,4 +25,8 @@ export const SectionText = styled.p`
   font-size: 32px;
   height: 118px;
   width: 50%;
+
+  @media (max-width: 850px) {
+    font-size: 20px;
+  }
 `;

@@ -21,6 +21,11 @@ export const MainForm = styled.form`
 
 export const SectionTitle = styled.h1`
   font-size: 48px;
+
+  @media (max-width: 850px) {
+    font-size: 32px;
+    text-align: center;
+  }
 `;
 
 export const Styles = {
