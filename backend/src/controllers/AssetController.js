@@ -44,7 +44,7 @@ class AssetController {
 
       const newAsset = await Assets.create(assetApi);
 
-      return res.status(204).json(newAsset);
+      return res.status(200).json(newAsset);
     } catch (e) {
       return res.status(500).json(e.message);
     }
