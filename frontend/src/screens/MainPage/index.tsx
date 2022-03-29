@@ -5,6 +5,7 @@ import { Styles } from "./styles";
 import NavigationBar from "../../components/NavigationBar";
 import TextSection from "../../components/TextSection";
 import { MainContainer } from "./styles";
+import Footer from "../../components/Footer";
 
 function MainPage() {
   return (
@@ -13,6 +14,7 @@ function MainPage() {
       <TextSection />
       <hr style={Styles.divider} />
       <Form />
+      <Footer />
     </MainContainer>
   );
 }
