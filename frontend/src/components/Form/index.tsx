@@ -73,12 +73,7 @@ function Form({ queryGenerator }: any) {
         end_value: queryEnd?.end_value,
       });
     }, 1000);
-  }, [
-    queryEnd,
-    queryStart?.name,
-    queryStart?.start_date,
-    queryStart?.start_value,
-  ]);
+  }, [queryEnd]);
 
   /* passes the query data to its parent - MAIN PAGE */
   useEffect(() => {

@@ -14,6 +14,8 @@ import { Button } from "@mui/material";
 import { MainSection, Styles } from "./styles";
 import { colors } from "../../assets/theme/theme";
 
+import randomColor from "randomcolor";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,15 +26,28 @@ ChartJS.register(
   Legend
 );
 
-const options = {
+const options: any = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top" as const,
+      position: "right" as const,
+      labels: {
+        font: {
+          size: 12,
+          family: "Montserrat",
+          weight: "bold",
+        },
+      },
     },
     title: {
       display: true,
       text: "Preço de fechamento de ativos / dia",
+      labels: {
+        font: {
+          size: 20,
+          family: "Montserrat",
+        },
+      },
     },
   },
 };
@@ -49,6 +64,9 @@ function Chart({ query }: any) {
   const [items, setItems] = useState<any>(false);
   const [queryData, setQueryData] = useState<Query>();
   const [queries, setQueries] = useState<any>([]);
+  const [labels, setLabels] = useState<any>([]);
+  const [dataset, setDataSet] = useState<any>([]);
+  const [data, setData] = useState<any>({});
 
   const queryChange = (query: any) => {
     if (query.name) {
@@ -61,34 +79,70 @@ function Chart({ query }: any) {
       });
 
       setItems(true);
-      // setQueries([...queries, queryData]);
     }
   };
 
-  const labels = [queryData?.queryStartDate, queryData?.queryEndDate];
+  const showAssets = () => {
+    setLabels([]);
+    setDataSet([]);
+    setData({});
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: queryData?.queryLabel,
-        data: [queryData?.queryStartValue, queryData?.queryEndValue],
-        borderColor: colors.darkBlue,
-        backgroundColor: colors.darkBlue,
-      },
-    ],
+    queries.map((value: any) => {
+      if (!labels.includes(value.queryStartDate)) {
+        labels.push(value.queryStartDate);
+      }
+
+      if (!labels.includes(value.queryEndDate)) {
+        labels.push(value.queryEndDate);
+      }
+
+      let color = randomColor();
+
+      dataset.push({
+        label: value?.queryLabel,
+        data: [
+          { x: value.queryStartDate, y: value?.queryStartValue },
+          { x: value.queryEndDate, y: value?.queryEndValue },
+        ],
+        borderColor: color,
+        backgroundColor: color,
+      });
+    });
+
+    console.log(labels, dataset);
+
+    setData({
+      labels: labels,
+      datasets: dataset,
+    });
+  };
+
+  const clearChart = () => {
+    setQueries([]);
+    setItems(false);
   };
 
   useEffect(() => {
     queryChange(query);
   }, [query]);
 
+  useEffect(() => {
+    if (queryData) {
+      queries.push(queryData);
+    }
+    showAssets();
+  }, [queryData]);
+
   return (
     <MainSection>
       {items && (
         <>
           <Line style={Styles.lineStyle} options={options} data={data} />
-          <Button style={Styles.button} type="submit">
+          <Button
+            onClick={() => clearChart()}
+            style={Styles.button}
+            type="submit"
+          >
             Limpar busca
           </Button>
         </>
