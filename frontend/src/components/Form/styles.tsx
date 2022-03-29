@@ -50,7 +50,19 @@ export const Styles = {
     fontFamily: "Montserrat",
     fontSize: 18,
     fontWeight: "bold",
-    marginTop: 80,
+    marginTop: 50,
     marginBottom: 30,
+  },
+  alert: {
+    marginTop: 40,
+    fontWeight: "bold",
+    fontFamily: "Montserrat",
+    fontSize: 18,
+  },
+  requireSpan: {
+    color: "red",
+    fontWeight: "bold",
+    marginTop: 10,
+    alignSelf: "flex-start",
   },
 };

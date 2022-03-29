@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { colors } from "../../assets/theme/theme";
-import { Button, InputLabel, Input, InputAdornment } from "@mui/material";
+import {
+  Button,
+  InputLabel,
+  Input,
+  InputAdornment,
+  Alert,
+} from "@mui/material";
 import { SectionTitle, MainSection, MainForm, Styles } from "./styles";
 import api from "../../services/api";
 
@@ -23,13 +29,20 @@ type QueryEnd = {
 };
 
 function Form({ queryGenerator }: any) {
-  const { control, handleSubmit } = useForm<FormData>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
   const [queryStart, setQueryStart] = useState<QueryStart>();
   const [queryEnd, setQueryEnd] = useState<QueryEnd>();
   const [query, setQuery] = useState({});
+  const [alert, setAlert] = useState(false);
 
   /* called upon the form submit - api requests */
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    setAlert(false);
+
     await api
       .post("/assets", {
         name: `${data.name}`,
@@ -44,6 +57,7 @@ function Form({ queryGenerator }: any) {
       })
       .catch((err: any) => {
         console.log(err.message);
+        setAlert(true);
       });
 
     await api
@@ -59,6 +73,7 @@ function Form({ queryGenerator }: any) {
       })
       .catch((err: any) => {
         console.log(err.message);
+        setAlert(true);
       });
   };
 
@@ -94,7 +109,7 @@ function Form({ queryGenerator }: any) {
           name="name"
           control={control}
           rules={{
-            required: true,
+            required: "Campo obrigatório",
           }}
           defaultValue=""
           render={({ field }) => (
@@ -116,6 +131,9 @@ function Form({ queryGenerator }: any) {
             />
           )}
         />
+        {errors.name && (
+          <span style={Styles.requireSpan}>{errors.name.message}</span>
+        )}
         <InputLabel
           style={Styles.inputLabel}
           htmlFor="input-with-icon-adornment"
@@ -126,7 +144,7 @@ function Form({ queryGenerator }: any) {
           name="start_date"
           control={control}
           rules={{
-            required: true,
+            required: "Campo obrigatório",
           }}
           defaultValue=""
           render={({ field }) => (
@@ -139,6 +157,9 @@ function Form({ queryGenerator }: any) {
             />
           )}
         />
+        {errors.start_date && (
+          <span style={Styles.requireSpan}>{errors.start_date.message}</span>
+        )}
         <InputLabel
           style={Styles.inputLabel}
           htmlFor="input-with-icon-adornment"
@@ -149,7 +170,7 @@ function Form({ queryGenerator }: any) {
           name="end_date"
           control={control}
           rules={{
-            required: true,
+            required: "Campo obrigatório",
           }}
           defaultValue=""
           render={({ field }) => (
@@ -162,6 +183,14 @@ function Form({ queryGenerator }: any) {
             />
           )}
         />
+        {errors.end_date && (
+          <span style={Styles.requireSpan}>{errors.end_date.message}</span>
+        )}
+        {alert && (
+          <Alert style={Styles.alert} severity="error">
+            Consulta não encontrada. Tente novamente
+          </Alert>
+        )}
         <Button style={Styles.button} type="submit">
           Buscar
         </Button>
