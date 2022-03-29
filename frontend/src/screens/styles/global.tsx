@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline:0;
     box-sizing:border-box;
+    
 }
 
 #root{
@@ -14,6 +15,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body{
+    max-width: 100vw;
     font-family: 'Montserrat', sans-serif;
 }
 
