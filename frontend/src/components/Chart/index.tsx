@@ -15,6 +15,7 @@ import { MainSection, Styles } from "./styles";
 import { colors } from "../../assets/theme/theme";
 
 import randomColor from "randomcolor";
+import AssetsTable from "../AssetsTable";
 
 ChartJS.register(
   CategoryScale,
@@ -42,11 +43,10 @@ const options: any = {
     title: {
       display: true,
       text: "Preço de fechamento de ativos / dia",
-      labels: {
-        font: {
-          size: 20,
-          family: "Montserrat",
-        },
+      color: colors.dark,
+      font: {
+        size: 22,
+        family: "Montserrat",
       },
     },
   },
@@ -72,9 +72,13 @@ function Chart({ query }: any) {
     if (query.name) {
       setQueryData({
         queryLabel: query.name,
-        queryStartDate: query.start_date,
+        queryStartDate: new Date(query.start_date).toLocaleDateString("pt-br", {
+          timeZone: "UTC",
+        }),
         queryStartValue: query.start_value,
-        queryEndDate: query.end_date,
+        queryEndDate: new Date(query.end_date).toLocaleDateString("pt-br", {
+          timeZone: "UTC",
+        }),
         queryEndValue: query.end_value,
       });
 
@@ -96,7 +100,7 @@ function Chart({ query }: any) {
         labels.push(value.queryEndDate);
       }
 
-      let color = randomColor();
+      let randColor = randomColor();
 
       dataset.push({
         label: value?.queryLabel,
@@ -104,12 +108,10 @@ function Chart({ query }: any) {
           { x: value.queryStartDate, y: value?.queryStartValue },
           { x: value.queryEndDate, y: value?.queryEndValue },
         ],
-        borderColor: color,
-        backgroundColor: color,
+        borderColor: randColor,
+        backgroundColor: randColor,
       });
     });
-
-    console.log(labels, dataset);
 
     setData({
       labels: labels,
@@ -138,6 +140,7 @@ function Chart({ query }: any) {
       {items && (
         <>
           <Line style={Styles.lineStyle} options={options} data={data} />
+          <AssetsTable queries={queries} />
           <Button
             onClick={() => clearChart()}
             style={Styles.button}
