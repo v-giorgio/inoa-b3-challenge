@@ -1,6 +1,6 @@
 <div align="center">
     <h1> </h1>
-    <h2>🎬 ConsilB3 🎬</h2>
+    <img width="300" src="./frontend/src/assets/logo.png" />
     <hr />
     <p>
     <a href="https://nodejs.org/en/"><img src="https://img.shields.io/badge/Backend-Node.js-green" alt="API main language" /></a>
