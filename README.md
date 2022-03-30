@@ -134,7 +134,7 @@ Foram utilizadas as seguintes tecnologias e ferramentas no projeto:
 #### 🔵 No terminal bash (Git), clone este repositório
 
 ```
-https://github.com/v-giorgio/inoa-b3-challenge.git
+git clone https://github.com/v-giorgio/inoa-b3-challenge.git
 ```
 
 <br>
