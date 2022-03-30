@@ -19,4 +19,16 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  background-color: rgba(61, 113, 215, 0.97);
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: rgba(244, 244, 244, 1);
+    border-radius: 10px;
+}
+
 `;

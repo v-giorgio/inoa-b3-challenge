@@ -29,6 +29,7 @@ ChartJS.register(
 
 const options: any = {
   responsive: true,
+  maintainAspectRatio: true,
   plugins: {
     legend: {
       position: "right" as const,

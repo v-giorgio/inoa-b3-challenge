@@ -18,12 +18,9 @@ export const Styles = {
     backgroundColor: colors.light,
     padding: 14,
     borderRadius: 20,
-    maxHeight: 500,
-    minHeight: 500,
-    minWidth: 1000,
-    maxWidth: 1400,
     margin: "0 auto",
     marginTop: 50,
+    width: 1000,
   },
   button: {
     color: colors.light,
