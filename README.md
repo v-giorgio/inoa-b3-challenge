@@ -231,15 +231,7 @@ npm start
 
 ### Frontend:
 
-#### 🔵 Abra o terminal e acesse a pasta `frontend`
-
-- Retornar à raíz do projeto:
-
-```
-cd ../
-```
-
-- Acessar o `frontend`:
+#### 🔵 Deixe o terminal anterior aberto e rodando e abra um novo terminal. Acesse a pasta frontend nesse novo terminal
 
 ```
 cd frontend
@@ -260,6 +252,8 @@ npm install
 ```
 npm start
 ```
+
+#### A aplicação irá rodar em `localhost:3000`
 
 <br>
 
