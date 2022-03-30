@@ -19,10 +19,13 @@ function AssetsTable({ queries }: any) {
           borderRadius: 20,
           padding: 15,
           textAlign: "center",
-          width: "100%",
         }}
       >
-        <Table sx={{ minWidth: 650 }} size="medium" aria-label="assets table">
+        <Table
+          sx={{ maxWidth: 1000, minWidth: 150 }}
+          size="medium"
+          aria-label="assets table"
+        >
           <TableHead>
             <TableRow>
               <TableCell
